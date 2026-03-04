@@ -1,0 +1,3 @@
+aws_profile     = "default"
+domain_name     = "example.com"
+route53_zone_id = "Z0123456789ABCDEF"

@@ -27,7 +27,6 @@ variable "environment" {
 variable "domain_name" {
   description = "Domain name for receiving emails via SES"
   type        = string
-  default     = "fluorineai.com"
 }
 
 variable "route53_zone_id" {
