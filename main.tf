@@ -48,16 +48,20 @@ resource "aws_lambda_function" "newsletter" {
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
   handler          = "index.handler"
   runtime          = "python3.12"
-  timeout          = 30
-  memory_size      = 128
+  timeout          = var.lambda_timeout
+  memory_size      = var.lambda_memory_size
 
   role = aws_iam_role.lambda_role.arn
 
   environment {
     variables = {
-      ENV = var.environment
+      ENV              = var.environment
+      S3_BUCKET_NAME   = var.s3_bucket_name
+      S3_PARSED_PREFIX = var.s3_parsed_prefix
     }
   }
+
+  tags = local.common_tags
 }
 
 resource "aws_cloudwatch_log_group" "lambda_logs" {
